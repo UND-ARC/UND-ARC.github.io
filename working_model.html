@@ -10,7 +10,6 @@
       padding: 0;
       overflow-x: hidden;
       font-family: Arial, sans-serif;
-      position: relative; /* Ensure proper positioning of elements */
     }
     nav {
       background-color: #333;
@@ -31,32 +30,25 @@
       color: #ccc;
     }
     .background-container {
-      position: relative; /* Ensure overlay text positioning */
+      position: fixed;
+      top: 0;
+      left: 0;
       width: 100%;
-      height: 100vh; /* Adjust as needed */
+      height: 100%;
       background-size: cover;
       background-position: center;
       z-index: -1; /* Ensure background is behind other content */
     }
     .overlay-text {
       position: absolute;
-      top: 20%;
-      right: 5%;
-      width: 200px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       background-color: rgba(0, 0, 0, 0.5);
       color: #fff;
       padding: 10px;
       border-radius: 5px;
-    }
-    .footer {
-      background-color: #333;
-      color: #fff;
-      padding: 10px;
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      text-align: center;
+      display: none; /* Initially hidden */
     }
     .content {
       padding: 20px;
@@ -73,15 +65,10 @@
     <!-- Add more links as needed -->
   </nav>
   <div class="background-container" id="background-container"></div>
-  <div class="overlay-text" id="overlay-text-1">
-    <p>This is overlay text 1.</p>
-  </div>
-  <div class="overlay-text" id="overlay-text-2">
-    <p>This is overlay text 2.</p>
-  </div>
-  <!-- Add more overlay text containers as needed -->
-  <div class="footer">
-    <p>This is the footer.</p>
+  <div class="content">
+    <!-- Your content here -->
+    <h1>Welcome to CAD Design Showcase</h1>
+    <p>This is where you can provide additional information about your CAD design.</p>
   </div>
 
   <script>
@@ -162,3 +149,4 @@
   </script>
 </body>
 </html>
+
