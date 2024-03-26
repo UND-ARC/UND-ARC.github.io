@@ -84,7 +84,7 @@
     <p>This is the footer.</p>
   </div>
 
-  <script>
+    <script>
     const backgroundContainer = document.getElementById('background-container');
     const overlayText1 = document.getElementById('overlay-text-1');
     const overlayText2 = document.getElementById('overlay-text-2');
@@ -92,6 +92,8 @@
 
     let currentImageIndex = 1; // Initial image index
     const maxImages = 20; // Assuming there are 20 images
+
+    let startY = 0; // Variable to store initial touch position
 
     // Function to preload images
     function preloadImages() {
@@ -125,8 +127,11 @@
       // Add more conditions to show overlay text for other images
     }
 
-    // Function to handle mouse scroll event
+    // Function to handle scroll event
     function handleScroll(event) {
+      // Prevent default scroll behavior to stop the page from scrolling
+      event.preventDefault();
+
       // Detect scroll direction
       const delta = Math.sign(event.deltaY); // -1 for scroll up, 1 for scroll down
 
@@ -145,13 +150,46 @@
 
       // Update overlay text visibility
       updateOverlayText();
-
-      // Prevent default scroll behavior to stop the page from scrolling
-      event.preventDefault();
     }
 
-    // Add scroll event listener to the document
+    // Function to handle touch start event
+    function handleTouchStart(event) {
+      startY = event.touches[0].clientY; // Store initial touch position
+    }
+
+    // Function to handle touch move event
+    function handleTouchMove(event) {
+      // Prevent default touch behavior to stop the page from scrolling
+      event.preventDefault();
+
+      // Determine the direction of touch movement
+      const deltaY = event.touches[0].clientY - startY;
+      const delta = Math.sign(deltaY); // -1 for upward swipe, 1 for downward swipe
+
+      // Update current image index based on touch movement
+      currentImageIndex += delta;
+
+      // Ensure currentImageIndex stays within the range of available images
+      if (currentImageIndex < 1) {
+        currentImageIndex = 1;
+      } else if (currentImageIndex > maxImages) {
+        currentImageIndex = maxImages;
+      }
+
+      // Update background image
+      updateBackgroundImage();
+
+      // Update overlay text visibility
+      updateOverlayText();
+
+      // Update startY for the next touch move
+      startY = event.touches[0].clientY;
+    }
+
+    // Add scroll and touch event listeners
     document.addEventListener('wheel', handleScroll, { passive: false });
+    document.addEventListener('touchstart', handleTouchStart, { passive: false });
+    document.addEventListener('touchmove', handleTouchMove, { passive: false });
 
     // Preload images when the page loads
     window.addEventListener('load', preloadImages);
@@ -160,5 +198,6 @@
     updateBackgroundImage();
     updateOverlayText();
   </script>
+
 </body>
 </html>
