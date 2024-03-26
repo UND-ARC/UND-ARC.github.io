@@ -1,1 +1,30 @@
-test
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        header {
+            background-color: rgba(0, 0, 0, 0.5); /* Transparent black background */
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        nav {
+            display: inline-block;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            padding: 20px;
+            text-align: center;
+        }
+        .container img {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+        }
